@@ -46,7 +46,16 @@ references `items`(`itemId`, `itemData`)
 > [!Warning]
 > Si le panneau est "détruit", alors son prix devient nul.
 
+## 1. Historique
+
 Proposez la création de la table `signs_sales_logs` pour stocker l'historique des achats.
+
+## 2. Nouvelle version
+
+### 2.1 Préparation (item_template)
+
+Sur les versions plus récentes (dites "1.18"), les identifiants d'items sont devenus des chaînes de caractères uniques; respectivement `minecraft:white_wool` et `minecraft:yellow_wool`.
+Cela correspond, dans `item_template`, à l'information `strkey`.
 
 On crée la table `item_template` pour préparer les prochaines mises à jour de Minecraft.
 
@@ -64,14 +73,15 @@ unique index(`itemId`, `itemData`)
 Comment modifier `trader_sign` et `signs_sales_logs` pour qu'elles se basent sur `item_template` ?
 Proposer une solution de migration complète.
 
-Sur les versions plus récentes (dites "1.18"), les identifiants d'items sont devenus des chaînes de caractères uniques; respectivement `minecraft:white_wool` et `minecraft:yellow_wool`.
-Cela correspond, dans `item_template`, à l'information `strkey`.
+### 2.2 Bascule
 
 Le code du serveur modifié n'a pas accès à l'ID "interne" de `item_template` dans son code directement, mais a accès à l'identifiant sous forme de chaîne de caractères, et peut effectuer des requêtes.
 
 Proposez une solution pour que le code du jeu puisse:
 - insérer de nouveaux panneaux
 - enregistrer les actions d'achat des joueurs
+
+### 2.3 Action
 
 Le développeur ayant réalisé la migration du plugin des panneaux commerçants vers la 1.18 a ajouté,
 dans `trader_signs` et `signs_sales_logs` un champ `string_id`, stockant la clef "chaîne", sans clef étrangère.
