@@ -77,8 +77,11 @@ Proposer une solution de migration complète.
 
 Le code du serveur modifié n'a pas accès à l'ID "interne" de `item_template` dans son code directement, mais a accès à l'identifiant sous forme de chaîne de caractères, et peut effectuer des requêtes.
 
+Typiquement, lors d'une interaction avec un panneau existant, le jeu ne connaît que l'identifiant (chaîne) de l'objet ainsi que l'ID interne (entier) du panneau.
+
 Proposez une solution pour que le code du jeu puisse:
 - insérer de nouveaux panneaux
+- détruire des panneaux
 - enregistrer les actions d'achat des joueurs
 
 ### 2.3 Action
