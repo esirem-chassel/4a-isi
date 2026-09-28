@@ -23,6 +23,11 @@ create table `items` (
 primary key(`itemId`, `itemData`)
 );
 
+create table `users` (
+`id` int not null primary key auto_increment,
+`name` varchar(200) not null unique
+);
+
 create table `trader_signs` (
 `id` int not null primary key auto_increment,
 `x` int not null,
@@ -31,24 +36,36 @@ create table `trader_signs` (
 `itemId` int not null,
 `itemData` int not null,
 `status` enum('active', 'destroyed') not null default 'active',
+`destroyer` int default null,
 `price` double(20,2) default null,
 `stack` int not null default 1,
 `total` int not null default 0,
 constraint `fk_trader_signs_item`
-foreign key (`itemId`, `itemData`)
-references `items`(`itemId`, `itemData`)
+foreign key (`itemId`)
+references `items`(`itemId`),
+constraint `fk_trader_signs_destroyer`
+foreign key (`destroyer`)
+references `users`(`id`)
+on delete set null on update cascade
 );
 ```
 
 > [!Note]
-> Les informations inutiles dans le cadre de l'exercice (liens avec la table `users`, etc.) ont été retirées.
+> Les informations inutiles dans le cadre de l'exercice (champs supplémentaires de la table `users`, etc.) ont été retirées.
 
 > [!Warning]
 > Si le panneau est "détruit", alors son prix devient nul.
 
-## 1. Historique
+## 1. Existant
+
+### 1.1 Historique
 
 Proposez la création de la table `signs_sales_logs` pour stocker l'historique des achats.
+
+### 1.2 Lien avec item
+
+Que constatez-vous concernant le lien avec items ?
+Comment corrigeriez-vous cette situation ?
 
 ## 2. Nouvelle version
 
