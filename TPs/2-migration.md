@@ -56,6 +56,8 @@ on delete set null on update cascade
 > [!Warning]
 > Si le panneau est "détruit", alors son prix devient nul.
 
+Des données ont été générées et placées dans [le fichier `datasets/tp2.sql`](https://github.com/esirem-chassel/4a-isi/blob/main/TPs/datasets/tp2.sql)
+
 ## 1. Existant
 
 ### 1.1 Historique
