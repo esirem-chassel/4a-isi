@@ -1,6 +1,6 @@
 
 CREATE TABLE Accounts (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     email VARCHAR(200) NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE Accounts (
 );
 
 CREATE TABLE Customers (
-    account_id INT PRIMARY KEY,
+    account_id INTEGER PRIMARY KEY,
     birth_date DATE,
 
     FOREIGN KEY (account_id)
@@ -20,7 +20,7 @@ CREATE TABLE Customers (
 );
 
 CREATE TABLE DeliveryAddresses (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_id INT NOT NULL,
     label VARCHAR(50) NOT NULL,
     street_address VARCHAR(200) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE DeliveryAddresses (
 );
 
 CREATE TABLE Partners (
-    account_id INT PRIMARY KEY,
+    account_id INTEGER PRIMARY KEY,
     company_name VARCHAR(200),
 
     FOREIGN KEY (account_id)
@@ -43,7 +43,7 @@ CREATE TABLE Partners (
 );
 
 CREATE TABLE Restaurants (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     partner_id INT NOT NULL UNIQUE,
     name VARCHAR(150) NOT NULL,
     description TEXT,
@@ -61,7 +61,7 @@ CREATE TABLE Restaurants (
 
 
 CREATE TABLE MenuCategories (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     restaurant_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     description TEXT,
@@ -71,7 +71,7 @@ CREATE TABLE MenuCategories (
 );
 
 CREATE TABLE MenuItems (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     category_id INT NOT NULL,
     name VARCHAR(150) NOT NULL,
     description TEXT,
@@ -83,7 +83,7 @@ CREATE TABLE MenuItems (
 );
 
 CREATE TABLE DeliveryDrivers (
-    account_id INT PRIMARY KEY,
+    account_id INTEGER PRIMARY KEY,
     employee_number CHAR(30) NOT NULL UNIQUE,
     hire_date DATE NOT NULL,
     available BOOLEAN NOT NULL DEFAULT TRUE,
@@ -93,7 +93,7 @@ CREATE TABLE DeliveryDrivers (
 );
 
 CREATE TABLE Orders (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_id INT NOT NULL,
     restaurant_id INT NOT NULL,
     delivery_address_id INT NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE OrderItems (
 
 
 CREATE TABLE Reviews (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     order_id INT NOT NULL UNIQUE,
     rating INT NOT NULL,
     comment TEXT,
