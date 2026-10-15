@@ -48,5 +48,7 @@ if __name__ == '__main__':
         print(r)
         r = tester.q("select strftime('%Y', order_date) as y, count(id) as nb from orders group by y")
         print(r)
+        r = tester.q("select case when r.city=a.city then 1 else 0 end as same_city, count(o.id) as nb from orders o left join restaurants r on r.id=o.restaurant_id left join deliveryaddresses a on a.id=o.delivery_address_id group by same_city")
+        print(r)
     else:
         print("Usage : `test.py <path>` with `<path>` being the path to the SQLite database")
