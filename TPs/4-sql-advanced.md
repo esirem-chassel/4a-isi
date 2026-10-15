@@ -1,4 +1,4 @@
-# SQL : performances et notions avancées
+# SQL : notions avancées
 
 ## Contexte
 
