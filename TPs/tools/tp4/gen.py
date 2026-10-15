@@ -5,7 +5,7 @@ from names import *
 
 class Generator:
     def __init__(self):
-        self.db = sqlite3.connect('TPs/datasets/tp4.db')
+        self.db = sqlite3.connect('TPs/datasets/tp5.db', isolation_level=None)
     def qa(self, query:str, qargs:tuple = ()):
         cr = self.db.cursor()
         cr.execute(query, qargs)
@@ -15,8 +15,7 @@ class Generator:
         cr.execute(query, qargs)
         return cr.fetchone()
     def generate(self):
-        # start by generating N accounts, including at least 2 customers, 2 partners, 2 drivers
-        pass
+        self.generateOrders()
     def generateAccount(self):
         pass
     def generateCustomer(self):
@@ -45,8 +44,9 @@ class Generator:
         self.qa("select account_id as id from deliverydrivers order by random()")
         for l in r:
             drivers.append(l[0])
-        print("Generating 100k orders...")
-        for i in range(100000):
+        nb = 100000
+        print(f"Generating {nb} orders (c={len(customers)}|r={len(restos)}|d={len(drivers)})...")
+        for i in range(nb):
             self.generateOrder(random.choice(customers), random.choice(restos), random.choice(drivers))
     def generateOrder(self, customerId, restoId, driverId):
         q = "insert into orders (customer_id, restaurant_id, delivery_address_id, driver_id, order_date) " \
@@ -55,7 +55,6 @@ class Generator:
         cr = self.db.cursor()
         cr.execute(q, (customerId, restoId, driverId, customerId))
         orderId = cr.lastrowid
-        print(f"Inserting order {orderId}")
         q = "insert into orderitems (order_id, menu_item_id, quantity, unit_price, item_name) " \
             " select ?, i.id, random()%10, i.price, i.name from menuitems i " \
             " left join menucategories c on c.id=i.category_id " \
@@ -63,4 +62,5 @@ class Generator:
             " order by random() limit 10"
         cr.execute(q, (orderId, restoId))
 
-Generator().generateOrders()
+if __name__ == '__main__':
+    Generator().generate()

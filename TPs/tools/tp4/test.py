@@ -43,12 +43,11 @@ class SQLTester:
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
+        print("Tester ready. Type one query a line. Empty line to stop.")
         tester = SQLTester(sys.argv[1])
-        r = tester.q("select substr(a.postal_code, 0, 2) as dep, count(o.id) as nb from orders o left join deliveryaddresses a on a.id=o.delivery_address_id group by dep")
-        print(r)
-        r = tester.q("select strftime('%Y', order_date) as y, count(id) as nb from orders group by y")
-        print(r)
-        r = tester.q("select case when r.city=a.city then 1 else 0 end as same_city, count(o.id) as nb from orders o left join restaurants r on r.id=o.restaurant_id left join deliveryaddresses a on a.id=o.delivery_address_id group by same_city")
-        print(r)
+        guard = ''
+        for line in iter(input, guard):
+            r = tester.q(line)
+            print(r)
     else:
         print("Usage : `test.py <path>` with `<path>` being the path to the SQLite database")
