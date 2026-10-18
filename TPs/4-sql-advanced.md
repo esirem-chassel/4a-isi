@@ -246,3 +246,11 @@ Que constatez-vous quant aux temps de réponse ?
 ### Déclencheurs et procédures stockées
 
 Effectuez les mêmes actions coté déclencheurs, à une différence près : nous allons passer par une procédure stockée nommée `cancelOrder` que vous devrez créer, afin d'annuler une commande.
+
+### Vues : matérialisation
+
+Effectuez la même opération coté vues, mais testez également de matérialiser la vue.
+
+Comparez les performances en lecture et écriture entre une vue matérialisée et non-matérialisée.
+
+Que constatez-vous, notemment à la création de la vue ?
