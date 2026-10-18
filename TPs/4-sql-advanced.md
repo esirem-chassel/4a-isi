@@ -216,3 +216,33 @@ Ajoutez un ou plusieurs déclencheurs pour annuler toute commande en statut "WAI
 
 
 ## Vues
+
+Une vue SQL est une requête synthétique qui est virtuelle, par défaut, et peut devenir physiquement présente, si cette vue est dite matérialisée.
+
+Il est à noter que les vues matérialisées n'existent pas en SQLite.
+
+Avant de commencer, créez une requête pour obtenir, pour un restaurant précis (choisissez-le bien !), la liste des commandes en statut WAITING.
+
+Créez une vue corresponsant à la liste des commandes en statut WAITING pour chaque restaurant.
+
+Lancez cette vue pour ce même restaurant, et notez à la fois le timing et le plan d'exécution.
+
+Comparez les deux résultats. Que constatez-vous ?
+
+## La même, en MySQL/MariaDB
+
+Sur un raspberry, installez un serveur MariaDB et le nécessaire coté client.
+Assurez-vous également que `sqlite3` est disponible.
+
+Modifiez les requêtes du fichier `tp4.sql` pour qu'elles soient compatibles MySQL/MariaDB, et insérez votre base.
+Ensuite, exportez en CSV les données de `tp4.db` pour réimporter en CSV vers vos nouvelles bases MySQL.
+
+### Index : différentiel
+
+Effectuez les mêmes opérations que vous avez réalisé sur les parties index.
+
+Que constatez-vous quant aux temps de réponse ?
+
+### Déclencheurs et procédures stockées
+
+Effectuez les mêmes actions coté déclencheurs, à une différence près : nous allons passer par une procédure stockée nommée `cancelOrder` que vous devrez créer, afin d'annuler une commande.
