@@ -58,3 +58,23 @@ Il n'est pas attendu une application 100% fonctionnelle, mais un maximum d'avanc
 
 > [!Caution]
 > Tout code non-compris est considéré comme nul. Avant de balancer ce TP à une IA, réfléchissez par vous-même !
+
+# Annexes
+
+## Ressources sur SQLite / Conception DB
+
+### Mermaid
+
+## Infos sur FastAPI
+
+### Installation / mise en place de FastAPI
+
+### Démarrage : créer des routes
+
+### Connexion DB
+
+## Bases sur HTML/CSS/JS
+
+### Templates HTML
+
+### Fetch
