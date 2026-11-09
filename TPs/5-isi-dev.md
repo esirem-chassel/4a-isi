@@ -59,6 +59,13 @@ Il n'est pas attendu une application 100% fonctionnelle, mais un maximum d'avanc
 > [!Caution]
 > Tout code non-compris est considéré comme nul. Avant de balancer ce TP à une IA, réfléchissez par vous-même !
 
+## Extension : analyse
+
+A partir de votre application et de sa conception, quelles sont vos suggestions pour :
+- améliorer la sécurité de l'application
+- permettre une meilleure extensibilité (pouvoir ajouter aisément des fonctionnalités)
+- accroître la résilience de l'application (sa résistance aux pannes, aux erreurs)
+
 # Annexes
 
 ## Ressources sur SQLite / Conception DB
