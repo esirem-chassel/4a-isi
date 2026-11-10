@@ -8,12 +8,22 @@ L'applicatif attendu sera un applicatif Web.
 
 Nous utiliserons l'IAAS de l'UB ou les Raspberry pour les tests en production.
 
+> [!Warning]
+> A chaque fois que des chevrons `<>` sont utilisés dans ces consignes, il est nécessaire de les remplacer par les éléments adéquats.
+> Par exemple, `<username>` indique que vous devrez remplacer cet élément par un nom d'utilisateur, **en remplaçant les chevrons également**.
+> `<username>` pourrait par exemple devenir `esirem-chassel`
+
 ## Décomposition
 
 Pour ce TP, vous devez vous mettre en équipe d'au minimum 3 membres, et concevoir les différentes briques avec certaines contraintes :
 - la partie Base de données sera en SQLite
 - la partie Back-end sera en Python sur FastAPI
 - la partie Front-end sera en HTML/CSS/Javascript sans framework imposé
+
+> [!Note]
+> Ces choix ont été fait pour vous afin que l'ensemble du projet puisse être assemblé, testé et déployé sans trop d'efforts.
+> Si vous faites le choix de passer par des framework supplémentaires, vous risquez de mettre en difficulté l'ensemble votre équipe, ou d'accroître les difficultés de tests et déploiements.
+> Ici, avec cette stack, il sera aisé de configuré FastAPI/SQLModel/SQLAlchemy afin de se connecter en SQLite et de servir statiquement le HTML/CSS/Javascript, qui peut être ajouté en tant que submodule ou un simple lien symbolique !
 
 ## Versionning
 
@@ -22,6 +32,7 @@ L'ensemble du projet **devra** être versionné sur les principes suivants :
 - Les dépôts seront nommés respectivement `4a-isi-projet-db`, `4a-isi-projet-front` et `4a-isi-projet-back`
 - Tous les dépôts sont publics
 - Chaque dépôt aura l'intégralité de l'équipe ajoutée en collaborateurs, ainsi que votre enseignant `esirem-chassel`
+- Chaque dépôt devra comporter un `README.md` indiquant la liste des collaborateurs du projet, ainsi que des liens vers les autres projets, en plus des indications éventuelles quant au projet en lui-même
 
 ## Possibilités de l'application
 
@@ -70,11 +81,71 @@ A partir de votre application et de sa conception, quelles sont vos suggestions 
 
 ## Ressources sur SQLite / Conception DB
 
+[Documentation SQLite](https://www.sqlite.org/docs.html)
+
 ### Mermaid
+
+[Mermaid](https://mermaid.js.org/) est un pseudo-langage de description de graphiques.
+
+Il permet, avec du code, de visualiser différents processus, qu'il s'agisse de flowchart, de diagrammes UML...
+
+Le plus pratique est de l'utiliser [dans Github, qui supporte Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams).
 
 ## Infos sur FastAPI
 
+[FastAPI](https://fastapi.tiangolo.com/) est un framework simpliste de création rapide d'API en Python.
+
 ### Installation / mise en place de FastAPI
+
+L'installation est assez simple, et usuelle pour tout package/framework Python : https://fastapi.tiangolo.com/tutorial/#install-fastapi
+
+Il est déconseillé de passer par `uv` à moins que votre équipe ne soit habituée à ce pseudo-gestionnaire d'environnements.
+L'utilisation de `venv`, `pip` et d'un fichier `requirements.txt` est fortement conseillée.
+
+<details>
+<summary>Détails de l'installation pas-à-pas si vous êtes absolument perdus, comme un lapin au milieu d'un blizzard</summary>
+
+*Note : les étapes 1 à 4 ne sont à réaliser qu'une seule fois sur votre poste. Les étapes 5 et 6 sont à réaliser à chaque fois que vous souhaitez travailler sur votre projet.*
+
+**1. Clonez votre dépôt**
+`git clone <uri distante> <chemin local>`
+
+**2. Déplacez-vous dans votre clone**
+
+`cd <chemin local>`
+
+**3. Créez votre venv**
+
+`py -m venv .venv`
+
+**4. __Si ce n'est déjà fait__, créez votre fichier `requirements.txt` à la racine de votre dépôt, et ajoutez-y FastAPI**
+
+Ajoutez la ligne `fastapi[standard]` dans votre `requirements.txt`.
+
+**5. Activez votre venv**
+
+Sur Windows avec Powershell : `Set-ExecutionPolicy -Scope=Process Unrestricted` puis `.\.venv\Scripts\Activate.ps1`
+Sur Linux OU sur Windows avec Git Bash *(conseillé)* : `source .venv/Scripts/activate`
+
+**6. Installez tous les packages python nécessaires dans votre venv**
+
+`pip install -r requirements.txt`
+  
+</details>
+
+Une fois FastAPI installé, à nouveau, la documentation se suffit pour commencer : https://fastapi.tiangolo.com/tutorial/first-steps/
+
+Créez au minimun un fichier `main.py` et initialisez une variable `app` contenant une instance de FastAPI, comme indiqué dans la documentation.
+
+> [!Tip]
+> Attention à bien indiquer le point d'entrée de votre application dans le `pyproject.toml` à nouveau [comme indiqué dans la documentation](https://fastapi.tiangolo.com/tutorial/first-steps/#configure-the-app-entrypoint-in-pyproject-toml).
+
+> [!Caution]
+> A chaque fois que vous voulez faire du python, y compris tester/lancer le serveur FastAPI, vous devez le faire dans un CLI avec votre venv actif.
+> Sous VSC, l'activation et la détection des venv reste très aléatoire.
+> Il est conseillé de passer par la CLI pour lancer le serveur FastAPI en mode dev : `fastapi dev`.
+> Cela va recharger tout seul le serveur lors de la modification des fichiers !
+
 
 ### Démarrage : créer des routes
 
