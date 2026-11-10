@@ -108,6 +108,7 @@ L'utilisation de `venv`, `pip` et d'un fichier `requirements.txt` est fortement 
 *Note : les étapes 1 à 4 ne sont à réaliser qu'une seule fois sur votre poste. Les étapes 5 et 6 sont à réaliser à chaque fois que vous souhaitez travailler sur votre projet.*
 
 **1. Clonez votre dépôt**
+
 `git clone <uri distante> <chemin local>`
 
 **2. Déplacez-vous dans votre clone**
@@ -147,7 +148,49 @@ Créez au minimun un fichier `main.py` et initialisez une variable `app` contena
 > Cela va recharger tout seul le serveur lors de la modification des fichiers !
 
 
-### Démarrage : créer des routes
+### Démarrage : créer des routes, renvoyer des données...
+
+Votre objectif dans ce TP est de créer les routes nécessaires à la manipulation de votre système.
+Il est donc nécessaire de définir la liste des routes API en amont, avec la ou les personne(s) responsable(s) du front.
+
+Dans un premier temps, il est conseillé de créer ces routes ne renvoyant rien, puis renvoyant des données fictives ou "mock", puis de remplir le code applicatif pouvant être développé, et de continuer avec du code réel interagissant avec la base de données.
+
+<details>
+<summary>Exemples de routes</summary>
+
+Ne renvoyant aucune donnée :
+
+```py
+@router.patch("/users{uid}", summary="Update specific information for current user")
+async def modify():
+    pass
+```
+
+Renvoyant des données statiques :
+
+```py
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/", summary="Show the current API version")
+async def home():
+    return {"version": "0.1a"}
+```
+
+Renvoyant des données réelles (ou non !) utilisant des librairies développées dans le projet :
+
+```py
+@app.get("/", name="List all bingos", response_model=BingosList)
+async def index():
+    bingos = getAllBingos()
+    res = []
+    for b in bingos:
+        res.append(convertBingoToOutput(b, False))
+    return {"bingos": res}
+```
+
+</details>
 
 ### Connexion DB
 
