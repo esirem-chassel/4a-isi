@@ -246,7 +246,8 @@ function callbackListElement(id, name) {
 
 Une requête fetch est très simple à réaliser, mais elle mobilise certaines connaissances de JS, notemment la partie "Promesses".
 
-Un exemple de requête fetch basique :
+<details>
+  <summary>Un exemple de requête fetch basique</summary>
 
 ```js
 // version sans async
@@ -278,3 +279,5 @@ async function fetchText(url) {
 }
 
 ```
+
+</details>
