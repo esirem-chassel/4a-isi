@@ -8,6 +8,8 @@ L'applicatif attendu sera un applicatif Web.
 
 Nous utiliserons l'IAAS de l'UB ou les Raspberry pour les tests en production.
 
+Le plus important dans ce TP est l'articulation et la communication entre les différentes parties; bref l'ingénierie autour du système dans son entièreté !
+
 > [!Warning]
 > A chaque fois que des chevrons `<>` sont utilisés dans ces consignes, il est nécessaire de les remplacer par les éléments adéquats.
 > Par exemple, `<username>` indique que vous devrez remplacer cet élément par un nom d'utilisateur, **en remplaçant les chevrons également**.
@@ -76,6 +78,11 @@ A partir de votre application et de sa conception, quelles sont vos suggestions 
 - améliorer la sécurité de l'application
 - permettre une meilleure extensibilité (pouvoir ajouter aisément des fonctionnalités)
 - accroître la résilience de l'application (sa résistance aux pannes, aux erreurs)
+
+# Evaluation
+
+Elle sera réalisée par présentation de votre projet et des différentes parties auxquelles chaque personne a contribué.
+La pertinence des explications sera particulièrement prise en compte; si vous me racontez des feintes pour vous faire passer pour votre grand ami Claude, le résultat pourrait être relativement négatif.
 
 # Annexes
 
@@ -194,8 +201,80 @@ async def index():
 
 ### Connexion DB
 
+Utilisez [SQLModel, intégré dans FastAPI](https://fastapi.tiangolo.com/tutorial/sql-databases/) pour la connexion à la base de données.
+
 ## Bases sur HTML/CSS/JS
+
+Normalement, vous connaissez HTML/CSS/JS, puisque vous avez validé le module correspondant en 3A.
+Néanmoins, je peux vous redonner des documentations sur le sujet :
+- HTML : https://developer.mozilla.org/en-US/docs/Web/HTML
+- CSS : https://developer.mozilla.org/en-US/docs/Web/CSS
+- JS : https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
 
 ### Templates HTML
 
+Un concept pratique en HTML/JS est celui de [templates](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots).
+Cela permet de préparer des éléments complets en HTML, avec des données génériques, et de les dupliquer pour les insérer / déplacer dans la page après, par exemple, un chargement asynchrone.
+
+<details>
+  <summary>Exemple avec une liste et des éléments</summary>
+  
+```html
+<ul id="myList"></ul>
+<template id="tpl">
+  <li class="list-el" data-lid=""></li>
+</template>
+```
+
+```js
+// on suppose la fonction "callbackListElement" appelée pour chaque élément obtenu après appel au back-office
+function callbackListElement(id, name) {
+  let tpl = document.importNode(document.getElementById('tpl').content, true);
+  tpl.querySelector('li').dataset.lid = id;
+  tpl.querySelector('li').innerText = name;
+  document.getElementById('myList').appendChild(tpl);
+}
+```
+
+</details>
+
+
 ### Fetch
+
+[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) est la "nouvelle" API JS pour effectuer des requêtes asynchrones. C'est ce dont vous avez besoin pour communiquer depuis le front vers le back.
+
+Une requête fetch est très simple à réaliser, mais elle mobilise certaines connaissances de JS, notemment la partie "Promesses".
+
+Un exemple de requête fetch basique :
+
+```js
+// version sans async
+fetch("URI", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ test: "val" }),
+}).then((r) => {
+  r.json().then((res) => {
+    // res has the response parsed as JSON
+  });
+});
+
+// version async
+async function fetchText(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const res = await response.json();
+    console.log(res);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+```
